@@ -98,3 +98,26 @@ export const Button = styled.button`
     top: 4px;
   }
 `;
+
+export const StatisticsList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  li {
+    display: flex;
+    gap: 10px;
+    font-size: 20px;
+    p:first-of-type {
+      font-weight: bold;
+    }
+  }
+`;
+
+export const SectionEl = styled.section`
+  text-align: center;
+`;
+
+export const NotificationEl = styled.div`
+  margin-top: 20px;
+  font-weight: bold;
+`;

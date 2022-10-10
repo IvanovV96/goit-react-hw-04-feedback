@@ -7,14 +7,13 @@ import { Notification } from './Notification';
 
 class Feedback extends Component {
   state = { good: 0, neutral: 0, bad: 0 };
-  onLeaveFeedback = e => {
-    const option = e.target.textContent.toLowerCase();
+  onLeaveFeedback = (option) => {
     this.setState(prevState => ({ [option]: prevState[option] + 1 }));
   };
   countTotalFeedback = () => {
     const { good, neutral, bad } = this.state;
-    const total = good + neutral + bad;
-    return total;
+    return good + neutral + bad;
+    
   };
   countPositiveFeedbackPercentage = () => {
     const { good, neutral, bad } = this.state;
@@ -22,18 +21,16 @@ class Feedback extends Component {
     return isNaN(result) ? false : result;
   };
   render() {
+    const { good, neutral, bad } = this.state;
     const total = this.countTotalFeedback();
     const totalPercentage = this.countPositiveFeedbackPercentage();
-    const { good, neutral, bad } = this.state;
-    console.log(!!good);
+    const options = Object.keys(this.state)
     return (
       <Box display="flex" flexDirection="column" alignItems="center">
         <Section title="Please, leave your feedback">
-          <FeedbackButtons onLeaveFeedback={this.onLeaveFeedback} />
+          <FeedbackButtons options={options} onLeaveFeedback={this.onLeaveFeedback} />
         </Section>
-        {!!{ good } && !!{ neutral } && !!{ bad } ? (
-          <Notification message="There is no feedback" />
-        ) : (
+        {!!good || !!neutral || !!bad ? (
           <Section title="Statistics">
             <Statistics
               good={good}
@@ -43,6 +40,8 @@ class Feedback extends Component {
               totalPercentage={totalPercentage}
             />
           </Section>
+        ) : (
+          <Notification message="There is no feedback" />
         )}
       </Box>
     );
