@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import PropTypes from 'prop-types';
-import { ButtonsList, Button } from './Feedback.styled';
+import { ButtonsList, Button } from '../Feedback/Feedback.styled';
 
 export const FeedbackButtons = ({ options, onLeaveFeedback }) => {
   return (
