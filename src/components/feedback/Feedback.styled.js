@@ -8,6 +8,7 @@ export const Box = styled.div`
 export const ButtonsList = styled.ul`
   display: flex;
   gap: 10px;
+  list-style: none;
 `;
 
 export const Button = styled.button`
@@ -107,6 +108,10 @@ export const StatisticsList = styled.ul`
     display: flex;
     gap: 10px;
     font-size: 20px;
+    align-items: center;
+    p {
+      margin: 0;
+    }
     p:first-of-type {
       font-weight: bold;
     }
