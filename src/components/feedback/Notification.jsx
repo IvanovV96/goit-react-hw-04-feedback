@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import { NotificationEl } from './Feedback.styled';
 
 export const Notification = ({ message }) => {
@@ -11,5 +11,4 @@ export const Notification = ({ message }) => {
 
 Notification.propTypes = {
   message: PropTypes.string.isRequired,
-}
-
+};

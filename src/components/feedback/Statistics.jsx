@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import { StatisticsList } from './Feedback.styled';
 
 export const Statistics = ({ good, bad, neutral, total, totalPercentage }) => {
@@ -34,5 +34,4 @@ Statistics.propTypes = {
   neutral: PropTypes.number,
   total: PropTypes.number,
   totalPercentage: PropTypes.string,
-  
-}
+};

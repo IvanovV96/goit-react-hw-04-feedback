@@ -1,6 +1,7 @@
 import _ from 'lodash';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import { ButtonsList, Button } from './Feedback.styled';
+
 export const FeedbackButtons = ({ options, onLeaveFeedback }) => {
   return (
     <ButtonsList>
@@ -19,9 +20,7 @@ export const FeedbackButtons = ({ options, onLeaveFeedback }) => {
 
 FeedbackButtons.propTypes = {
   option: PropTypes.arrayOf({
-    option: PropTypes.string
+    option: PropTypes.string,
   }),
   onLeaveFeedback: PropTypes.func,
-}
-
-
+};

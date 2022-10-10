@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import { SectionEl } from './Feedback.styled';
 
 export const Section = ({ title, children }) => {
@@ -11,5 +11,5 @@ export const Section = ({ title, children }) => {
 };
 
 Section.propTypes = {
-  title: PropTypes.string
-}
+  title: PropTypes.string,
+};

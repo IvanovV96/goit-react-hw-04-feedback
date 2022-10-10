@@ -5,15 +5,14 @@ import { Statistics } from './Statistics';
 import { Section } from './Section';
 import { Notification } from './Notification';
 
-class Feedback extends Component {
+export class Feedback extends Component {
   state = { good: 0, neutral: 0, bad: 0 };
-  onLeaveFeedback = (option) => {
+  onLeaveFeedback = option => {
     this.setState(prevState => ({ [option]: prevState[option] + 1 }));
   };
   countTotalFeedback = () => {
     const { good, neutral, bad } = this.state;
     return good + neutral + bad;
-    
   };
   countPositiveFeedbackPercentage = () => {
     const { good, neutral, bad } = this.state;
@@ -24,11 +23,14 @@ class Feedback extends Component {
     const { good, neutral, bad } = this.state;
     const total = this.countTotalFeedback();
     const totalPercentage = this.countPositiveFeedbackPercentage();
-    const options = Object.keys(this.state)
+    const options = Object.keys(this.state);
     return (
       <Box display="flex" flexDirection="column" alignItems="center">
         <Section title="Please, leave your feedback">
-          <FeedbackButtons options={options} onLeaveFeedback={this.onLeaveFeedback} />
+          <FeedbackButtons
+            options={options}
+            onLeaveFeedback={this.onLeaveFeedback}
+          />
         </Section>
         {!!good || !!neutral || !!bad ? (
           <Section title="Statistics">
@@ -47,4 +49,3 @@ class Feedback extends Component {
     );
   }
 }
-export default Feedback;
