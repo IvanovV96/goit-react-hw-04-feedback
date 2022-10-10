@@ -5,7 +5,7 @@ import { Statistics } from '../Statistics/Statistics';
 import { Section } from '../Section/Section';
 import { Notification } from '../Notification/Notification';
 
-export class Feedback extends Component {
+class Feedback extends Component {
   state = { good: 0, neutral: 0, bad: 0 };
   onLeaveFeedback = option => {
     this.setState(prevState => ({ [option]: prevState[option] + 1 }));
@@ -49,3 +49,5 @@ export class Feedback extends Component {
     );
   }
 }
+
+export default Feedback;
