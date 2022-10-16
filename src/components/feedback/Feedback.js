@@ -17,13 +17,14 @@ export class Feedback extends Component {
   countPositiveFeedbackPercentage = () => {
     const { good, neutral, bad } = this.state;
     const result = parseFloat((good / (neutral + bad + good)) * 100).toFixed(2);
-    return isNaN(result) ? false : result;
+    return Number.isNaN(result) ? null : result;
   };
   render() {
     const { good, neutral, bad } = this.state;
     const total = this.countTotalFeedback();
     const totalPercentage = this.countPositiveFeedbackPercentage();
     const options = Object.keys(this.state);
+
     return (
       <Box display="flex" flexDirection="column" alignItems="center">
         <Section title="Please, leave your feedback">
@@ -32,7 +33,7 @@ export class Feedback extends Component {
             onLeaveFeedback={this.onLeaveFeedback}
           />
         </Section>
-        {!!good || !!neutral || !!bad ? (
+        {total ? (
           <Section title="Statistics">
             <Statistics
               good={good}

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { NotificationEl } from '../feedback/Feedback.styled';
+import { NotificationEl } from 'components/Notification/Notification.styled';
 
 export const Notification = ({ message }) => {
   return (

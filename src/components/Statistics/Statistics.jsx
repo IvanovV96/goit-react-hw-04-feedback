@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { StatisticsList } from '../feedback/Feedback.styled';
+import { StatisticsList } from 'components/Statistics/Statistics.styled';
 
 export const Statistics = ({ good, bad, neutral, total, totalPercentage }) => {
   return (
