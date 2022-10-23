@@ -1,52 +1,65 @@
-import React, { Component } from 'react';
+import { useState } from 'react';
 import { Box } from './Feedback.styled';
-import { FeedbackButtons } from '../FeedbackButtons/FeedbackButtons';
+import { Button, ButtonsList } from './Feedback.styled';
 import { Statistics } from '../Statistics/Statistics';
 import { Section } from '../Section/Section';
 import { Notification } from '../Notification/Notification';
 
-export class Feedback extends Component {
-  state = { good: 0, neutral: 0, bad: 0 };
-  onLeaveFeedback = option => {
-    this.setState(prevState => ({ [option]: prevState[option] + 1 }));
+export const Feedback = () => {
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
+
+  const onGoodClick = () => {
+    setGood(state => state + 1);
   };
-  countTotalFeedback = () => {
-    const { good, neutral, bad } = this.state;
-    return good + neutral + bad;
+  const onNeutralClick = () => {
+    setNeutral(state => state + 1);
   };
-  countPositiveFeedbackPercentage = () => {
-    const { good, neutral, bad } = this.state;
+  const onBadClick = () => {
+    setBad(state => state + 1);
+  };
+  const total = good + bad + neutral;
+  const countPositiveFeedbackPercentage = () => {
     const result = parseFloat((good / (neutral + bad + good)) * 100).toFixed(2);
     return Number.isNaN(result) ? null : result;
   };
-  render() {
-    const { good, neutral, bad } = this.state;
-    const total = this.countTotalFeedback();
-    const totalPercentage = this.countPositiveFeedbackPercentage();
-    const options = Object.keys(this.state);
+  const totalPercentage = countPositiveFeedbackPercentage();
 
-    return (
-      <Box display="flex" flexDirection="column" alignItems="center">
-        <Section title="Please, leave your feedback">
-          <FeedbackButtons
-            options={options}
-            onLeaveFeedback={this.onLeaveFeedback}
+  return (
+    <Box display="flex" flexDirection="column" alignItems="center">
+      <Section title="Please, leave your feedback">
+        <ButtonsList>
+          <li>
+            <Button type="button" onClick={onGoodClick}>
+              Good
+            </Button>
+          </li>
+          <li>
+            <Button type="button" onClick={onNeutralClick}>
+              Neutral
+            </Button>
+          </li>
+          <li>
+            <Button type="button" onClick={onBadClick}>
+              Bad
+            </Button>
+          </li>
+        </ButtonsList>
+      </Section>
+      {total ? (
+        <Section title="Statistics">
+          <Statistics
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={total}
+            totalPercentage={totalPercentage}
           />
         </Section>
-        {total ? (
-          <Section title="Statistics">
-            <Statistics
-              good={good}
-              neutral={neutral}
-              bad={bad}
-              total={total}
-              totalPercentage={totalPercentage}
-            />
-          </Section>
-        ) : (
-          <Notification message="There is no feedback" />
-        )}
-      </Box>
-    );
-  }
-}
+      ) : (
+        <Notification message="There is no feedback" />
+      )}
+    </Box>
+  );
+};
