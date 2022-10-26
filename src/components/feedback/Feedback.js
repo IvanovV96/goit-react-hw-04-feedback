@@ -1,24 +1,31 @@
 import { useState } from 'react';
 import { Box } from './Feedback.styled';
-import { Button, ButtonsList } from './Feedback.styled';
 import { Statistics } from '../Statistics/Statistics';
 import { Section } from '../Section/Section';
 import { Notification } from '../Notification/Notification';
+import { FeedbackButtons } from 'components/FeedbackButtons/FeedbackButtons';
 
 export const Feedback = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
 
-  const onGoodClick = () => {
-    setGood(state => state + 1);
+  const onClick = name => {
+    switch (name) {
+      case 'good':
+        setGood(s => s + 1);
+        break;
+      case 'neutral':
+        setNeutral(s => s + 1);
+        break;
+      case 'bad':
+        setBad(s => s + 1);
+        break;
+      default:
+        break;
+    }
   };
-  const onNeutralClick = () => {
-    setNeutral(state => state + 1);
-  };
-  const onBadClick = () => {
-    setBad(state => state + 1);
-  };
+
   const total = good + bad + neutral;
   const countPositiveFeedbackPercentage = () => {
     const result = parseFloat((good / (neutral + bad + good)) * 100).toFixed(2);
@@ -28,25 +35,8 @@ export const Feedback = () => {
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center">
-      <Section title="Please, leave your feedback">
-        <ButtonsList>
-          <li>
-            <Button type="button" onClick={onGoodClick}>
-              Good
-            </Button>
-          </li>
-          <li>
-            <Button type="button" onClick={onNeutralClick}>
-              Neutral
-            </Button>
-          </li>
-          <li>
-            <Button type="button" onClick={onBadClick}>
-              Bad
-            </Button>
-          </li>
-        </ButtonsList>
-      </Section>
+      <Section title="Please, leave your feedback"></Section>
+      <FeedbackButtons onClick={onClick} />
       {total ? (
         <Section title="Statistics">
           <Statistics
